@@ -1,45 +1,28 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Hamburger = () => {
-  const [showMenu, setShowMenu] = useState(false);
+  const [hamOpen, setHamOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setShowMenu((prevShowmenu) => !prevShowmenu);
+  const handleClick = () => {
+    setHamOpen(!hamOpen);
   };
 
   return (
-    <div onClick={toggleMenu} className="sm:hidden">
-      <div>
-        <div
-          className={`w-5 h-[3px] bg-white mb-1 ${
-            showMenu ? "duration-300 rotate-45 translate-y-2" : ""
-          }`}
-        ></div>
-        <div
-          className={`w-5 h-[3px] bg-white ${showMenu ? "opacity-0" : ""}`}
-        ></div>
-        <div
-          className={`w-5 h-[3px] bg-white mt-1 ${
-            showMenu ? " duration-300 -rotate-45 -translate-y-2" : ""
-          }`}
-        ></div>
+    <div className='sm:hidden cursor-pointer' onClick={handleClick}>
+      <div className='flex flex-col gap-1 items-center'>
+        <div className={!hamOpen?'w-[20px] h-[3px] bg-white':'w-[20px] h-[3px] bg-white translate-y-[6px]  rotate-[40deg]'}></div>
+        <div className={!hamOpen?'w-[20px] h-[3px] bg-white':''}></div>
+        <div className={!hamOpen?'w-[20px] h-[3px] bg-white':'w-[20px] h-[3px] bg-white -translate-y-[5px] -rotate-[40deg]'}></div>
       </div>
-
-      <div
-        className={
-          !showMenu
-            ? " absolute right-[0.20px] -top-[150px] flex flex-col items-center gap-2 p-2 w-full overflow-hidden font-semibold mt-[2.5rem] bg-white border-2 text-xl  transform transition-top duration-500 ease-in-out -z-10 "
-            : "flex flex-col items-center gap-2 p-2 w-full overflow-hidden font-semibold mt-[2.5rem] bg-white border-b-2 border-blue-300 shadow-lg text-xl absolute right-[0.20px] top-6 transform transition-top duration-700 ease-in z-10"
-        }
-      >
-        <a href="/">Home</a>
-        <a href="/products">Rooms</a>
-        {/* <a href="/search">Add Rooms</a> */}
-        <a href="/search">Login</a>
-        <a href="/search">Register</a>
+      <div className={!hamOpen?'absolute -top-[60px] right-0 -z-10 transform duration-0':'bg-slate-200 absolute top-[6.7%] right-0 flex flex-col items-center text-[20px] font-semibold text-black px-4 py-4 transform duration-300'}>
+        <Link to="/" className='hover:underline underline-offset-4'>Home</Link>
+        <Link to="/service" className='hover:underline underline-offset-4'>Service</Link>
+        <Link to="/about" className='hover:underline underline-offset-4'>About</Link>
+        <Link to="/contactus" className='hover:underline underline-offset-4'>ContactUs</Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Hamburger;
+export default Hamburger
